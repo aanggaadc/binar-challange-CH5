@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <%- include('partial/head') %> 
+</head>
+<style>
+    body{
+        background-image: url("/Assets/images/login-background.webp");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+</style>
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6">
+                <div class="login-dark d-flex justify-content-center align-items-center">
+                    <form action="/login" method="post">
+                        <h2 class="text-center mt-3" style="font-size: 40px; color: rgb(182, 182, 182);">LOGIN</h1>
+                        <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
+                        <div class="form-group mt-4"><input class="form-control" type="email" name="email" placeholder="Email"></div>
+                        <div class="form-group mt-5"><input class="form-control" type="password" name="password" placeholder="Password"></div>
+                            <% if (status === 'emailnotfound') { %>
+                            <%- include('partial/email-not-found') %>
+                            <% } else if (status === 'passwordnotmatch') { %>
+                            <%- include('partial/wrong-password') %>
+                            <% } %>
+
+                        <div class="form-group mt-4"><button class="btn btn-primary btn-block" type="submit">Log In</button></div>
+                        <div class="text-center" style="font-size: 14px;">Don't have an account? <a href="/signup">Sign Up</a></div>
+                </div>
+            </div>
+            <div class="col-6"></div>
+
+        </div>
+    </div>
+    
+
+    <script src="/Assets/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

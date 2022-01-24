@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partial/head') %> 
+</head>
+
+<style>
+    body {
+        background-color: rgb(148, 122, 88);
+    }
+</style>
+
+<body>
+    <div class="container-fluid">
+        <div class="row align-items-start">
+            <div class="col ms-5 mt-3">
+                <div id="header">
+                    <div class="logo">
+                        <img src="/Assets/images/logo-games.ico" alt="logo">
+                    </div>
+                    <h5 style="color: orange;font-size: 30px;margin-left: 18px;">ROCK PAPER SCISSORS</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" value="0" id="count">
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col grid">
+                <div class="div_obj user">
+                    <h4 class="text-center">PLAYER 1</h4>
+                    <img src="/Assets/images/batu.png" onclick="pilihan('batu')" id="img-user-batu" />
+                    <img src="/Assets/images/kertas.png" onclick="pilihan('kertas')" id="img-user-kertas" />
+                    <img src="/Assets/images/gunting.png" onclick="pilihan('gunting')" id="img-user-gunting" />
+                </div>
+            </div>
+            <div class="col grid">
+                <div id="result" class="h-100">
+                    <!-- <img src="assets/vs.png" id="img-result" /> -->
+                    <p class="vs">VS</p>
+
+                    <div class="div-win">
+                        <p class="win">PLAYER 1 <br> WIN</p>
+                    </div>
+
+                    <div class="div-lose">
+                        <p class="lose">COM <br> WIN</p>
+                    </div>
+
+                    <div class="div-draw">
+                        <p class="draw">DRAW</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col grid">
+                <div class="div_obj komputer">
+                    <h4 class="text-center">COM</h4>
+                    <img src="/Assets/images/batu.png" id="img-komputer-batu" />
+                    <img src="/Assets/images/kertas.png" id="img-komputer-kertas" />
+                    <img src="/Assets/images/gunting.png" id="img-komputer-gunting" />
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row align-items-end">
+            <div class="col text-center">
+                <div id="refresh">
+
+                </div>
+            </div>
+        </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</html>
+
+
+
+<script>
+    function pilihan(pilihan) {
+
+        var count = $("#count").val();
+
+        if (count === "0") {
+            var komputer_array = ['batu', 'kertas', 'gunting'];
+            var random_number = Math.floor(Math.random() * komputer_array.length);
+
+            var komputer = komputer_array[random_number];
+            var result = "";
+
+            if (komputer === pilihan) {
+                result = "draw";
+            } else {
+                if (komputer === 'batu' && pilihan === 'kertas') {
+                    result = "win";
+                } else if (komputer === 'batu' && pilihan === 'gunting') {
+                    result = "lose";
+                } else if (komputer === 'kertas' && pilihan === 'gunting') {
+                    result = "win";
+                } else if (komputer === 'kertas' && pilihan === 'batu') {
+                    result = "lose";
+                } else if (komputer === 'gunting' && pilihan === 'batu') {
+                    result = "win";
+                } else if (komputer === 'gunting' && pilihan === 'kertas') {
+                    result = "lose";
+                }
+            }
+
+            //set click count to 1 
+            $("#count").val("1");
+
+            // css user
+            $(".user #img-user-" + pilihan).css({
+                'background': 'rgb(211, 208, 208)'
+            });
+
+            //css komputer 
+            $(".komputer #img-komputer-" + komputer).css({
+                'background': 'rgb(211, 208, 208)'
+            });
+
+
+            //disable on click
+            // $(".div_obj img").click(function() {return false});
+            $(".user img").css("cursor", "default");
+
+
+            $(".vs").hide();
+
+
+            //nampilin div
+            $("#result .div-" + result).css("display", "block");
+
+
+            // $("#result img").remove();
+            // $("#result").append('<img src="assets/' + img_result + '" />');
+
+            //versi native
+            //// document.getElementById("result").innerHTML = '<img src="assets/' + img_result + '" />';
+
+            $("#refresh").append('<img src="/Assets/images/refresh.png" onclick="refresh()"/>');
+
+        }
+    }
+
+
+    function refresh() {
+        $("img").css("background", "none");
+        $("#result div").css("display", "none");
+        $("#refresh img").remove();
+
+        $(".user img").css("cursor", "pointer");
+
+        //set click count to 0
+        $("#count").val("0");
+        $(".vs").show();
+
+        //show vs
+        //versi remove
+        // $("#result img").remove();
+        // $("#result").append('<img src="assets/vs.jpg" />');
+
+        // $("#result img").attr("src", 'assets/vs.png');
+    }
+</script>

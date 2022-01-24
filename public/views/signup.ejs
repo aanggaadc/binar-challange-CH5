@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partial/head') %> 
+</head>
+<style>
+    body{
+        background-image: url("/Assets/images/sign-background.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+</style>
+<body>
+        <div class="container">        
+            <div class="row" style="margin: 10% 0;">
+                <div class="col-4"></div>
+                <div class="col-4"></div>                     
+                <div class="col-4">
+                    <div class="signup-form">
+                        <form action="/signup" method="post">
+                            <h2>Sign Up</h2>
+                            <p>It's free and only takes a minute.</p>
+                            <hr>
+                            <div class="form-group">
+                                <label>Username</label>
+                                <input type="text" class="form-control" name="nama" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" class="form-control" name="email" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" class="form-control" name="password" required="required">
+                            </div>
+                            <div class="form-group text-center">
+                                <button type="submit" class="btn btn-primary btn-block btn-lg">SIGN UP</button>
+                            </div>
+                            <p class="small text-center">By clicking the Sign Up button, you agree to our Terms & Conditions, and Privacy Policy</p>
+                        </form>
+                        <div class="text-center">Already have an account? <a href="/login">Login here</a></div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+</body>
+</html>
