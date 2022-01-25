@@ -132,6 +132,9 @@ app.post('/edit', async (req, res) => {
     const data = fs.readFileSync('./data/users.json', 'utf-8')
     const readData = JSON.parse(data)
 
+    const dataFind = readData.find((i) => {
+        return i.id == id
+    })
     const dataIndex = readData.findIndex((i) => {
         return i.id == id
     })
@@ -140,7 +143,7 @@ app.post('/edit', async (req, res) => {
         id :id,
         nama: nama,
         email: email,
-        password: hashedPassword
+        password: (req.body.password == "") ? dataFind.password : hashedPassword
     }
 
     readData[dataIndex] = dataEdited
