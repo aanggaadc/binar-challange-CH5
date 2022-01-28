@@ -41,7 +41,7 @@ app.get('/', (req, res) => {
 // ROUTING KE HALAMAN GAME 
 app.get('/game', isLoggedIn, (req, res) => {
     res.render('game',{
-        pageTitle: "Play Game"
+        pageTitle: "Rock Paper Scissors"
     })
 })
 
@@ -53,6 +53,7 @@ app.get('/signup', (req, res) => {
         pageTitle: "SIGNUP",
     })
 })
+
 
 //METHOD POST UNTUK SIGNUP USER BARU
 app.post('/signup', async (req, res) => {    
@@ -74,11 +75,48 @@ app.post('/signup', async (req, res) => {
 
 //ROUTING KE HALAMAN LOGIN
 app.get('/login', (req, res) => {
-    const {status} = req.query
+    const status = req.query.status
+    if(!status){
     res.render('login',{
         pageTitle: "LOGIN",
         status
-    })
+        })        
+    }else if(status=="emailnotfound"){
+            res.render('login',{
+                pageTitle: "LOGIN",
+                message : "Email Not Found",
+                status
+                })  
+    }else if(status=="passwordnotmatch"){
+            res.render('login',{
+                pageTitle: "LOGIN",
+                message : "Wrong Password",
+                status
+                })  
+    }else if(status=="notlogin"){
+            res.render('login',{
+                pageTitle: "LOGIN",
+                message : "Please Login First",
+                status
+                })  
+    }else if(status=="tokenexpired"){
+        res.render('login',{
+            pageTitle: "LOGIN",
+            message : "Your Session is Expired, Please Login Again",
+            status
+            })  
+    }else if(status=="editsuccsess"){
+        res.render('login',{
+            pageTitle: "LOGIN",
+            message : "Your Account Has Been Edited, Please Login Again",
+            status
+            })  
+        }else{
+            res.render('login',{
+                pageTitle: "LOGIN",
+                message : "You are not logged in, please login to Start The Game",
+                })   
+        }
 })
 
 
@@ -149,7 +187,7 @@ app.post('/edit', async (req, res) => {
     readData[dataIndex] = dataEdited
     fs.writeFileSync('./data/users.json', JSON.stringify(readData, null, 4))
     res.cookie('jwt', '', {maxAge:1})
-    res.redirect('/login')
+    res.redirect('/login?status=editsuccsess')
 })
 
 
@@ -161,7 +199,7 @@ app.post('/edit', async (req, res) => {
 //METHOD LOGOUT USER
 app.post('/logout', (req, res) => {
     res.cookie('jwt', '', {maxAge:1})
-    res.redirect('/')
+    res.redirect('/login')
 })
 
 

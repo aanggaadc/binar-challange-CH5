@@ -7,7 +7,7 @@ const isLoggedIn = (req, res, next) => {
         jwt.verify(token, 'secret', (err, decodedToken) => {
             if(err){
                 res.locals.user = null
-                res.redirect('/login')
+                res.redirect('/login?status=tokenexpired')
             }else{
                 res.locals.user = decodedToken
                 console.log("Token Is :")
@@ -17,7 +17,7 @@ const isLoggedIn = (req, res, next) => {
         })        
     } else {
         res.locals.user = null
-        res.redirect('/login')
+        res.redirect('/login?status=notlogin')
     }
 
 }
