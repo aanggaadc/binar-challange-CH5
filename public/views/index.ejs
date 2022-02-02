@@ -17,6 +17,12 @@
       <div id="main" class="hero_Section cover_Background">
         <div class="m-auto text-center">
           <div class="hero_Title">
+            <% if (status) { %>
+              <div class="alert alert-warning alert-dismissible show fade" role="alert">
+                <strong> <%= message %>  </strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+          <% }%>            
             <h1>PLAY TRADITIONAL GAME</h1>
           </div>
 
@@ -390,5 +396,7 @@
     <%- include('partial/footer') %> 
 
     <script src="/Assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/Assets/js/jquery-3.6.0.min.js"></script>
+    <script src="/Assets/js/alert.js"></script>
   </body>
 </html>

@@ -26,15 +26,26 @@ app.get('/api/user', (req, res) => {
 //ROUTING KE LANDING PAGE LOCALHOST:3000
 app.get('/', (req, res) => {
     const token = req.cookies.jwt
+    const status = req.query.status
 
     jwt.verify(token, 'secret', (err, decodedToken) => {
         res.locals.user = decodedToken
     })
 
-    res.render('index',{
-        pageTitle: "Main",
-        token
-    })
+    if(!status){  
+        res.render('index',{
+            pageTitle: "Main",
+            token,
+            status
+        })
+    }else if(status=="signupsuccsess"){
+        res.render('index',{
+            pageTitle: "Main",
+            token,
+            status,
+            message: "Account Created Succsessfully, Please Login to Start The Game"
+        })        
+    }    
 })
 
 
@@ -69,7 +80,7 @@ app.post('/signup', async (req, res) => {
     }
     readData.push(newUser)
     fs.writeFileSync('./data/users.json', JSON.stringify(readData, null, 4))
-    res.redirect('/')
+    res.redirect('/?status=signupsuccsess')
 })
 
 
@@ -203,6 +214,6 @@ app.post('/logout', (req, res) => {
 })
 
 
-app.listen(PORT, () =>{
+app.listen(PORT, () => {
     console.log(`Server Running at PORT ${PORT}`)
 })

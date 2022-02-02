@@ -4,5 +4,11 @@
         "nama": "AnggaraSetiawan",
         "email": "anggara@email.com",
         "password": "$2b$10$lIaEQzuuireyA60duOB0lO0xLDvRyDLKACmvpTOyPrgVHlQlb5Ro."
+    },
+    {
+        "id": "d4d0363d-0edb-45c6-9337-05aacd898299",
+        "nama": "dodol",
+        "email": "dodollided@email.com",
+        "password": "$2b$10$tqZGCvC5Xu1meomR6s6BUeOgFdM/xYrfB/BNFw8JermDfq6Up4N5q"
     }
 ]
